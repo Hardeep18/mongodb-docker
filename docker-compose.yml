@@ -1,0 +1,16 @@
+version: '2'
+services:
+  mongo:
+    image: mongo:4.0.4 
+    ports:
+     - "27015:27017"
+    environment:
+      MONGO_INITDB_DATABASE: demo
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+      MONGO_INITDB_ROOT_USERNAME: admin
+    container_name: mongo
+    restart: always
+    volumes:
+      - ./001_users.js:/docker-entrypoint-initdb.d/001_users.js:rw
+      
+     
