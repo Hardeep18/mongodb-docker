@@ -8,7 +8,8 @@ docker-compose up --build -d
 ```
 
 ```
-docker exec -it <container name> /bin/bash
+docker exec -it localmongo1 /bin/bash
+mongo
 
 ```
 

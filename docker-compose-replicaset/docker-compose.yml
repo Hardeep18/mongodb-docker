@@ -3,30 +3,44 @@ services:
   mongo1:
     hostname: mongo1
     container_name: localmongo1
-    image: mongo:4.0-xenial
+    image: mongo
     expose:
     - 27017
     ports:
       - 27011:27017
     restart: always
-    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0", "--dbpath","/data/db"]
+    volumes: 
+      - "db1:/data/db"
   mongo2:
     hostname: mongo2
     container_name: localmongo2
-    image: mongo:4.0-xenial
+    image: mongo
     expose:
     - 27017
     ports:
     - 27012:27017
     restart: always
-    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0", "--dbpath","/data/db" ]
+    volumes: 
+        - "db2:/data/db"
   mongo3:
     hostname: mongo3
     container_name: localmongo3
-    image: mongo:4.0-xenial
+    image: mongo
     expose:
     - 27017
     ports:
     - 27013:27017
     restart: always
-    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0", "--dbpath","/data/db" ]
+    volumes: 
+        - "db3:/data/db"
+
+volumes:
+    db1:
+      driver: local
+    db2:
+      driver: local
+    db3: 
+      driver: local
